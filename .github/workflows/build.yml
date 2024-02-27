@@ -1,12 +1,12 @@
 on:
   # Trigger analysis when pushing in master or pull requests, and when creating
   # a pull request.
-  push:
-    branches:
-      - main
-  pull_request:
-    branches:
-    - main
+  # push:
+  #   branches:
+  #     - main
+  # pull_request:
+  #   branches:
+  #   - main
   workflow_dispatch:
 name: Main Workflow
 jobs:

@@ -13,11 +13,16 @@ jobs:
         fetch-depth: 0
     - name:  Install sonar-scanner and build-wrapper
       uses: sonarsource/sonarcloud-github-c-cpp@v2
+    - name: Set up msbuild
+      uses: microsoft/setup-msbuild@v1.1
+    - name: Setup VSTest.console.exe # Needed to run tests and generate coverage
+      uses: darenm/Setup-VSTest@v1.2
+    - name: Install sonar-scanner and build-wrapper
+      uses: SonarSource/sonarcloud-github-c-cpp@v2
+
     - name: Run build-wrapper
       run: |
-       build-wrapper-win-x86-64 --out-dir ${{ env.BUILD_WRAPPER_OUT_DIR }} build-command
-      #here goes your compilation wrapped with build-wrapper; See https://docs.sonarcloud.io/advanced-setup/languages/c-c-objective-c/#analysis-steps-using-build-wrapper for more information
-      # build-preparation steps
+       build-wrapper-win-x86-64 --out-dir ${{ env.BUILD_WRAPPER_OUT_DIR }} msbuild sonar_scanner_example.vcxproj /t:rebuild /nodeReuse:false
     - name: Run sonar-scanner
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

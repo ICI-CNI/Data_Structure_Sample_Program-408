@@ -22,7 +22,7 @@ jobs:
 
     - name: Run build-wrapper
       run: |
-       build-wrapper-win-x86-64 --out-dir ${{ env.BUILD_WRAPPER_OUT_DIR }} msbuild
+       build-wrapper-win-x86-64.exe --out-dir  build_wrapper_output_directory MSBuild.exe /t:Rebuild /nodeReuse:False
     - name: Run sonar-scanner
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
